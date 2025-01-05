@@ -1,0 +1,1 @@
+A simple library built using html css and javascript. the javascript is done using objects and object constructors.
