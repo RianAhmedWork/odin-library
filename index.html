@@ -1,28 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
     <script src="script.js" defer></script>
     <div id="header">
         <h1>Library</h1>
-        <button>Add a book</button>
+        <button id="add-book">Add a book</button>
     </div>
     <div id="main">
+        <dialog id="book-modal">
+            <form action="GET">
+                <label for="form-title">Title:</label>
+                <input type="text" name="form-title" id="form-title" placeholder="The Hobbit" required>
+
+                <label for="form-author">Author:</label>
+                <input type="text" name="form-author" id="form-author" placeholder="J.R.R Tolkien" required>
+
+                <label for="form-pages">Pages:</label>
+                <input type="number" name="form-pages" id="form-pages" min="1" required>
+
+                <label for="form-checkbox">Read</label>
+                <input type="checkbox" name="form-checkbox" id="form-checkbox" value="Read">
+                <input type="hidden" name="form-checkbox" value="Unread">
+
+                <input type="reset">
+                <input type="submit" id="form-submit">
+            </form>
+        </dialog>
         <div class="book-card">
             <div class="book-title">The Hobbit</div>
             <div class="book-author">J.R.R Tolkien</div>
             <div class="book-pages">295 pages</div>
-            <div class="book-read">read</div>
+            <button class="book-read">Read</button>
+            <button class="book-remove">Remove</button>
         </div>
     </div>
     <div id="footer">
-        <a href="">Rian Ahmed</a>
-        <a href="">Source Code</a>
+        <a href="https://github.com/RianAhmedWork">Rian Ahmed</a>
+        <a href="https://github.com/RianAhmedWork/odin-library">Source Code</a>
     </div>
 </body>
+
 </html>
