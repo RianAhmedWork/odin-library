@@ -1,7 +1,7 @@
 const myLibrary = [];
 
 class Book {
-  constructor(title, author, pages, read, id){
+  constructor(title, author, pages, read, id) {
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -10,7 +10,7 @@ class Book {
   }
 
   changeRead() {
-    if(this.read === "Read") {
+    if (this.read === "Read") {
       this.read = "Unread";
     } else if (this.read === "Unread") {
       this.read = "Read";
@@ -41,51 +41,53 @@ function displayBooksOnPage() {
     const titleCompare = document.querySelectorAll(".book-title");
     let counter = 0;
     titleCompare.forEach((title) => {
-        if (title.textContent === String(myLibrary[i].title)) {
-            counter++;
-        }
+      if (title.textContent === String(myLibrary[i].title)) {
+        counter++;
+      }
     });
     if (counter === 0) {
-        const bookCard = document.createElement("div");
-        bookCard.classList = "book-card";
-        const bookTitle = document.createElement("div");
-        bookTitle.classList = "book-title";
-        bookTitle.textContent = myLibrary[i].title;
-        const bookAuthor = document.createElement("div");
-        bookAuthor.classList = "book-author";
-        bookAuthor.textContent = myLibrary[i].author;
-        const bookPages = document.createElement("div");
-        bookPages.classList = "book-pages";
-        bookPages.textContent = myLibrary[i].pages;
-        const bookRead = document.createElement("button");
-        bookRead.classList = "book-read";
-        bookRead.textContent = myLibrary[i].read;
-        bookRead.dataset.id = myLibrary[i].id;
-        const bookRemove = document.createElement("button");
-        bookRemove.classList = "book-remove";
-        bookRemove.textContent = "Remove";
-        bookRemove.dataset.id = myLibrary[i].id;
-        bookCard.append(bookTitle);
-        bookCard.append(bookAuthor);
-        bookCard.append(bookPages);
-        bookCard.append(bookRead);
-        bookCard.append(bookRemove);
-        document.getElementById("main").append(bookCard);
-        bookRemove.addEventListener("click", function() {
-          let index = myLibrary.findIndex(book => book.id === bookRemove.dataset.id);
-          if (index !== 1) {
-            myLibrary.splice(index, 1);
-            bookRemove.parentElement.remove();
-          }
-        });
-        bookRead.addEventListener("click", function() {
-          if (bookRead.textContent === "Read") {
-            bookRead.textContent = "Unread";
-          } else if (bookRead.textContent === "Unread") {
-            bookRead.textContent = "Read";
-          }
-          myLibrary[i].changeRead();
-        });
+      const bookCard = document.createElement("div");
+      bookCard.classList = "book-card";
+      const bookTitle = document.createElement("div");
+      bookTitle.classList = "book-title";
+      bookTitle.textContent = myLibrary[i].title;
+      const bookAuthor = document.createElement("div");
+      bookAuthor.classList = "book-author";
+      bookAuthor.textContent = myLibrary[i].author;
+      const bookPages = document.createElement("div");
+      bookPages.classList = "book-pages";
+      bookPages.textContent = myLibrary[i].pages;
+      const bookRead = document.createElement("button");
+      bookRead.classList = "book-read";
+      bookRead.textContent = myLibrary[i].read;
+      bookRead.dataset.id = myLibrary[i].id;
+      const bookRemove = document.createElement("button");
+      bookRemove.classList = "book-remove";
+      bookRemove.textContent = "Remove";
+      bookRemove.dataset.id = myLibrary[i].id;
+      bookCard.append(bookTitle);
+      bookCard.append(bookAuthor);
+      bookCard.append(bookPages);
+      bookCard.append(bookRead);
+      bookCard.append(bookRemove);
+      document.getElementById("main").append(bookCard);
+      bookRemove.addEventListener("click", function () {
+        let index = myLibrary.findIndex(
+          (book) => book.id === bookRemove.dataset.id
+        );
+        if (index !== 1) {
+          myLibrary.splice(index, 1);
+          bookRemove.parentElement.remove();
+        }
+      });
+      bookRead.addEventListener("click", function () {
+        if (bookRead.textContent === "Read") {
+          bookRead.textContent = "Unread";
+        } else if (bookRead.textContent === "Unread") {
+          bookRead.textContent = "Read";
+        }
+        myLibrary[i].changeRead();
+      });
     }
   }
 }
@@ -104,25 +106,32 @@ submit.addEventListener("click", function (e) {
   const formAuthor = document.getElementById("form-author");
   const formPages = document.getElementById("form-pages");
   const formCheckbox = document.getElementById("form-title");
+
   if (!formTitle.value || !formAuthor.value || !formPages.value) {
     alert("Please Fill Out All The Fields");
+    formTitle.classList.add("error");
+    formAuthor.classList.add("error");
+    formPages.classList.add("error");
   } else {
-  if (formCheckbox.checked) {
-    addBookToLibrary(
-      formTitle.value,
-      formAuthor.value,
-      formPages.value,
-      "Read"
-    );
-  } else {
-    addBookToLibrary(
-      formTitle.value,
-      formAuthor.value,
-      formPages.value,
-      "Unread"
-    );
+    formTitle.classList.remove("error");
+    formAuthor.classList.remove("error");
+    formPages.classList.remove("error");
+    if (formCheckbox.checked) {
+      addBookToLibrary(
+        formTitle.value,
+        formAuthor.value,
+        formPages.value,
+        "Read"
+      );
+    } else {
+      addBookToLibrary(
+        formTitle.value,
+        formAuthor.value,
+        formPages.value,
+        "Unread"
+      );
+    }
+    displayBooksOnPage();
+    dialog.close();
   }
-  displayBooksOnPage();
-  dialog.close();
-}
 });
